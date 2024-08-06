@@ -1,0 +1,78 @@
+---
+import type { GetStaticPaths } from "astro";
+import data from "pages/mail/data";
+import { parse } from "marked";
+
+export const getStaticPaths = (async () => {
+  return data.map((a) => {
+    return {
+      params: {
+        id: a.id,
+      },
+      props: a,
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const mail: any = Astro.props;
+---
+
+<div class="flex-1">
+  <div class="flex items-start p-4">
+    <div class="flex items-start gap-4 text-sm">
+      <span
+        class="flex h-10 w-10 items-center justify-center rounded-full bg-muted"
+      >
+        {mail.initial}
+      </span>
+      <div class="grid gap-1">
+        <div class="font-semibold">{mail.name}</div>
+        <div class="line-clamp-1 text-xs">{mail.subject}</div>
+        <div class="line-clamp-1 text-xs">
+          <span class="font-medium">Reply-To:</span>
+          {mail.email}
+        </div>
+      </div>
+    </div>
+    <div class="ml-auto text-xs text-muted-foreground">
+      {
+        new Date(mail.date).toLocaleString("en-US", {
+          year: "2-digit",
+          month: "long",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })
+      }
+    </div>
+  </div>
+  <div
+    class="flex-1 space-y-4 border-t border-border p-4 text-sm"
+    set:html={await parse(mail.text)}
+  />
+</div>
+
+<div class="flex-none space-y-4 border-t border-border p-4">
+  <div class="">
+    <label for="message" class="sr-only">Message</label>
+    <textarea
+      class="uk-textarea"
+      id="message"
+      placeholder={`Reply ${mail.name}`}></textarea>
+  </div>
+  <div class="flex justify-between">
+    <label class="inline-flex items-center gap-x-2 text-xs" for="mute">
+      <input
+        class="uk-toggle-switch uk-toggle-switch-primary"
+        id="mute"
+        type="checkbox"
+      />
+      Mute this thread
+    </label>
+    <button class="uk-button uk-button-primary" uk-toggle="#demo">
+      Send
+    </button>
+  </div>
+</div>

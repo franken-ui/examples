@@ -1,0 +1,66 @@
+---
+import "css/app.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      window.addEventListener("message", function (event) {
+        if (event.data === "dark-mode-enabled") {
+          document.documentElement.classList.add("dark");
+        }
+
+        if (event.data === "dark-mode-disabled") {
+          document.documentElement.classList.remove("dark");
+        }
+      });
+    </script>
+    <title>Examples - Franken UI</title>
+    <link
+      rel="preload"
+      href="/fonts/geist-font/fonts/GeistVariableVF.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist-font/fonts/GeistMonoVariableVF.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/fonts/geist-font/style.css" />
+
+    <script is:inline src="/js/uikit@3.21.6/uikit.min.js"></script>
+    <script is:inline src="/js/uikit@3.21.6/icons.min.js"></script>
+    <script is:inline src="/js/htmx@2.0.0/htmx.min.js"></script>
+    <script is:inline type="module" src="/js/franken-wc@0.0.6/wc.iife.js"
+    ></script>
+  </head>
+  <body
+    class="hidden bg-background font-geist-sans text-foreground antialiased md:block"
+  >
+    <slot />
+
+    <div class="uk-modal uk-flex-top" id="demo" uk-modal>
+      <div class="uk-modal-body uk-margin-auto-vertical uk-modal-dialog">
+        <span class="uk-modal-title">Just a demo</span>
+        <p class="mt-4">
+          The element you clicked is for demonstration purposes only and does
+          not lead to actual content. Everything you see here is a simulation
+          intended to demonstrate how the UI elements might look and behave in a
+          real application.
+        </p>
+        <div class="mt-5">
+          <button class="uk-modal-close uk-button uk-button-primary">Ok</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
