@@ -10,13 +10,25 @@ import "css/app.css";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
       window.addEventListener("message", function (event) {
         if (event.data === "dark-mode-enabled") {
           document.documentElement.classList.add("dark");
+          localStorage.setItem("color-theme", "dark");
         }
 
         if (event.data === "dark-mode-disabled") {
           document.documentElement.classList.remove("dark");
+          localStorage.setItem("color-theme", "light");
         }
       });
     </script>
@@ -39,9 +51,6 @@ import "css/app.css";
 
     <script is:inline src="/js/uikit@3.21.6/uikit.min.js"></script>
     <script is:inline src="/js/uikit@3.21.6/icons.min.js"></script>
-    <script is:inline src="/js/htmx@2.0.0/htmx.min.js"></script>
-    <script is:inline type="module" src="/js/franken-wc@0.0.6/wc.iife.js"
-    ></script>
   </head>
   <body
     class="hidden bg-background font-geist-sans text-foreground antialiased md:block"
@@ -58,9 +67,15 @@ import "css/app.css";
           real application.
         </p>
         <div class="mt-5">
-          <button class="uk-modal-close uk-button uk-button-primary">Ok</button>
+          <button class="uk-modal-close uk-button uk-button-primary">
+            Dismiss
+          </button>
         </div>
       </div>
     </div>
+
+    <script is:inline src="/js/htmx@2.0.0/htmx.min.js"></script>
+    <script is:inline src="/js/franken-wc@0.1.1/wc.iife.js" type="module"
+    ></script>
   </body>
 </html>
