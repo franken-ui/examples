@@ -33,11 +33,13 @@ import Master from "layouts/master.astro";
       </button>
 
       <div
-        class="uk-dropdown uk-drop w-[300px]"
+        class="uk-drop uk-dropdown w-[300px]"
         uk-drop="mode: click; pos: bottom-center"
       >
         <div class="m-1 flex items-center px-2 py-1.5">
-          <span class="opacity-50" uk-icon="icon: search; ratio: 0.8"></span>
+          <span class="size-4 opacity-50">
+            <uk-icon icon="search"></uk-icon>
+          </span>
           <input
             class="block w-full bg-transparent pl-2 text-sm focus:outline-none"
             placeholder="Search presets"
@@ -76,7 +78,7 @@ import Master from "layouts/master.astro";
       <button class="uk-button uk-button-secondary" uk-toggle="#save">
         Save
       </button>
-      <div class="uk-modal uk-flex-top" id="save" uk-modal>
+      <div class="uk-flex-top uk-modal" id="save" uk-modal>
         <div class="uk-margin-auto-vertical uk-modal-dialog">
           <div class="uk-modal-header">
             <h2 class="uk-modal-title">Save preset</h2>
@@ -110,7 +112,7 @@ import Master from "layouts/master.astro";
 
       <button class="uk-button uk-button-secondary"> Share </button>
       <div
-        class="uk-dropdown uk-drop w-[520px] p-4"
+        class="uk-drop uk-dropdown w-[520px] p-4"
         uk-drop="mode: click; pos: bottom-right;"
       >
         <h3 class="text-lg font-semibold">Share preset</h3>
@@ -166,7 +168,7 @@ import Master from "layouts/master.astro";
             clip-rule="evenodd"></path></svg
         >
       </button>
-      <div class="uk-dropdown uk-drop" uk-drop="mode: click; pos: bottom-right">
+      <div class="uk-drop uk-dropdown" uk-drop="mode: click; pos: bottom-right">
         <ul class="uk-dropdown-nav">
           <li>
             <a class="uk-drop-close" href="#demo" uk-toggle
@@ -350,11 +352,13 @@ import Master from "layouts/master.astro";
         </button>
 
         <div
-          class="uk-dropdown uk-drop w-[200px]"
+          class="uk-drop uk-dropdown w-[200px]"
           uk-drop="mode: click; pos: bottom-center"
         >
           <div class="m-1 flex items-center px-2 py-1.5">
-            <span class="opacity-50" uk-icon="icon: search; ratio: 0.8"></span>
+            <span class="size-4 opacity-50">
+              <uk-icon icon="search"></uk-icon>
+            </span>
             <input
               class="block w-full bg-transparent pl-2 text-sm focus:outline-none"
               placeholder="Search models"

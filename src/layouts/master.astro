@@ -1,5 +1,7 @@
 ---
 import "css/app.css";
+import core from "franken-ui/js/core.iife?url";
+import icon from "franken-ui/js/icon.iife?url";
 ---
 
 <!doctype html>
@@ -49,24 +51,26 @@ import "css/app.css";
     />
     <link rel="stylesheet" href="/fonts/geist-font/style.css" />
 
-    <script is:inline src="/js/uikit@3.21.6/uikit.min.js"></script>
-    <script is:inline src="/js/uikit@3.21.6/icons.min.js"></script>
+    <script is:inline src={core} type="module"></script>
+    <script is:inline src={icon} type="module"></script>
   </head>
   <body
     class="hidden bg-background font-geist-sans text-foreground antialiased md:block"
   >
     <slot />
 
-    <div class="uk-modal uk-flex-top" id="demo" uk-modal>
-      <div class="uk-modal-body uk-margin-auto-vertical uk-modal-dialog">
-        <span class="uk-modal-title">Just a demo</span>
-        <p class="mt-4">
+    <div class="uk-flex-top uk-modal" id="demo" uk-modal>
+      <div class="uk-margin-auto-vertical uk-modal-dialog">
+        <div class="uk-modal-header">
+          <div class="uk-modal-title">Just a demo</div>
+        </div>
+        <div class="uk-modal-body">
           The element you clicked is for demonstration purposes only and does
           not lead to actual content. Everything you see here is a simulation
           intended to demonstrate how the UI elements might look and behave in a
           real application.
-        </p>
-        <div class="mt-5">
+        </div>
+        <div class="uk-modal-footer">
           <button class="uk-modal-close uk-button uk-button-primary">
             Dismiss
           </button>
@@ -75,7 +79,5 @@ import "css/app.css";
     </div>
 
     <script is:inline src="/js/htmx@2.0.0/htmx.min.js"></script>
-    <script is:inline src="/js/franken-wc@0.1.1/wc.iife.js" type="module"
-    ></script>
   </body>
 </html>

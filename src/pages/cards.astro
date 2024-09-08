@@ -228,18 +228,17 @@ import Master from "layouts/master.astro";
                   <p class="text-sm text-muted-foreground">{a.email}</p>
                 </div>
                 <button class="uk-button uk-button-default" type="button">
-                  {a.role} <span class="ml-2" uk-drop-parent-icon />
+                  {a.role} <span class="ml-2 size-4" uk-drop-parent-icon />
                 </button>
 
                 <div
-                  class="uk-dropdown uk-drop w-[252px]"
+                  class="uk-drop uk-dropdown w-[252px]"
                   uk-drop="mode: click; pos: bottom-right"
                 >
                   <div class="m-1 flex items-center px-2 py-1.5">
-                    <span
-                      class="opacity-50"
-                      uk-icon="icon: search; ratio: 0.8"
-                    />
+                    <span class="opacity-50">
+                      <uk-icon icon="search" />
+                    </span>
                     <input
                       class="block w-full bg-transparent pl-2 text-sm focus:outline-none"
                       placeholder="Select a new role"
@@ -640,7 +639,7 @@ import Master from "layouts/master.astro";
                 </svg>
               </button>
               <div
-                class="uk-dropdown uk-drop"
+                class="uk-drop uk-dropdown"
                 uk-drop="mode: click; pos: bottom-right"
               >
                 <ul class="uk-dropdown-nav">

@@ -10,9 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.1",
-    "astro": "^4.13.1",
-    "franken-ui": "^0.2.1-next.0",
+    "@astrojs/check": "^0.9.3",
+    "astro": "^4.15.4",
+    "franken-ui": "^1.0.0",
     "marked": "^13.0.3",
     "moment": "^2.30.1",
     "postcss": "^8.4.40",
