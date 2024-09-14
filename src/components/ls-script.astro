@@ -1,0 +1,26 @@
+<script is:inline>
+  window.addEventListener("message", function (event) {
+    if (event.data.dark === true) {
+      htmlElement.classList.add("dark");
+      localStorage.setItem("mode", "dark");
+    }
+
+    if (event.data.dark === false) {
+      htmlElement.classList.remove("dark");
+      localStorage.setItem("mode", "light");
+    }
+
+    if (event.data.theme) {
+      const theme = Array.from(htmlElement.classList).find((cls) =>
+        cls.startsWith("uk-theme-"),
+      );
+
+      if (theme) {
+        htmlElement.classList.remove(theme);
+      }
+
+      htmlElement.classList.add(event.data.theme);
+      localStorage.setItem("theme", event.data.theme);
+    }
+  });
+</script>

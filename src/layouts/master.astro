@@ -2,6 +2,7 @@
 import "css/app.css";
 import core from "franken-ui/js/core.iife?url";
 import icon from "franken-ui/js/icon.iife?url";
+import LsScript from "components/ls-script.astro";
 ---
 
 <!doctype html>
@@ -12,28 +13,23 @@ import icon from "franken-ui/js/icon.iife?url";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
+      const htmlElement = document.documentElement;
+
       if (
-        localStorage.getItem("color-theme") === "dark" ||
-        (!("color-theme" in localStorage) &&
+        localStorage.getItem("mode") === "dark" ||
+        (!("mode" in localStorage) &&
           window.matchMedia("(prefers-color-scheme: dark)").matches)
       ) {
-        document.documentElement.classList.add("dark");
+        htmlElement.classList.add("dark");
       } else {
-        document.documentElement.classList.remove("dark");
+        htmlElement.classList.remove("dark");
       }
 
-      window.addEventListener("message", function (event) {
-        if (event.data === "dark-mode-enabled") {
-          document.documentElement.classList.add("dark");
-          localStorage.setItem("color-theme", "dark");
-        }
-
-        if (event.data === "dark-mode-disabled") {
-          document.documentElement.classList.remove("dark");
-          localStorage.setItem("color-theme", "light");
-        }
-      });
+      htmlElement.classList.add(
+        localStorage.getItem("theme") || "uk-theme-zinc",
+      );
     </script>
+    <LsScript />
     <title>Examples - Franken UI</title>
     <link
       rel="preload"

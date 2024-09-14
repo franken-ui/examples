@@ -1,0 +1,250 @@
+---
+import Master from "layouts/master.astro";
+---
+
+<Master>
+  <div
+    class="flex h-16 items-center justify-between border-b border-border px-8 py-4"
+  >
+    <h2 class="text-lg font-semibold">Playground</h2>
+    <div class="flex w-full flex-1 items-center justify-end space-x-2">
+      <div class="h-9 w-[200px] lg:w-[300px]">
+        <uk-select
+          name="preset"
+          placeholder="Load a preset"
+          searchable
+          uk-cloak
+        >
+          <optgroup label="Examples">
+            {
+              [
+                "Grammatical Standard English",
+                "Summarize for a 2nd grader",
+                "Text to command",
+                "Q&A",
+                "English to other languages",
+                "Parse unstructured data",
+                "Classification",
+                "Natural language to Python",
+                "Explain code",
+                "Chat",
+                "More examples",
+              ].map((a) => <option>{a}</option>)
+            }
+          </optgroup>
+        </uk-select>
+      </div>
+
+      <button class="uk-button uk-button-secondary" uk-toggle="#save">
+        Save
+      </button>
+      <div class="uk-flex-top uk-modal" id="save" uk-modal>
+        <div class="uk-margin-auto-vertical uk-modal-dialog">
+          <div class="uk-modal-header">
+            <h2 class="uk-modal-title">Save preset</h2>
+            <p class="mt-1.5 text-sm text-muted-foreground">
+              This will save the current playground state as a preset which you
+              can access later or share with others.
+            </p>
+          </div>
+          <div class="uk-modal-body space-y-4 py-0">
+            <div class="space-y-2">
+              <label class="uk-form-label" for="name">Name</label>
+              <input class="uk-input" id="name" type="text" />
+            </div>
+
+            <div class="space-y-2">
+              <label class="uk-form-label" for="description">Description</label>
+              <input class="uk-input" id="description" type="text" />
+            </div>
+          </div>
+          <div class="uk-modal-footer text-right">
+            <button class="uk-modal-close uk-button uk-button-primary">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="uk-button uk-button-secondary" uk-toggle="#demo">
+        View Code
+      </button>
+
+      <button class="uk-button uk-button-secondary"> Share </button>
+      <div
+        class="uk-drop uk-dropdown w-[520px] p-4"
+        uk-drop="mode: click; pos: bottom-right;"
+      >
+        <h3 class="text-lg font-semibold">Share preset</h3>
+        <p class="mt-1.5 text-sm text-muted-foreground">
+          Anyone who has this link and an OpenAI account will be able to view
+          this.
+        </p>
+
+        <div class="flex items-center space-x-2 pt-4">
+          <div class="flex-1">
+            <input
+              class="uk-input"
+              readonly
+              type="text"
+              value="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003"
+            />
+          </div>
+          <div class="flex-none">
+            <button
+              class="uk-drop-close uk-button uk-button-primary"
+              uk-toggle="#demo"
+            >
+              <uk-icon icon="copy"></uk-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="uk-button uk-button-secondary">
+        <span class="size-4">
+          <uk-icon icon="ellipsis"></uk-icon>
+        </span>
+      </button>
+      <div class="uk-drop uk-dropdown" uk-drop="mode: click; pos: bottom-right">
+        <ul class="uk-dropdown-nav">
+          <li>
+            <a class="uk-drop-close" href="#demo" uk-toggle
+              >Content filter preferences</a
+            >
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close text-destructive" href="#demo" uk-toggle
+              >Delete preset</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex h-[700px] gap-x-6 px-8 py-6">
+    <div class="flex-1">
+      <textarea
+        class="uk-textarea h-full p-4"
+        placeholder="Write a tagline for an ice cream shop"
+        readonly></textarea>
+    </div>
+
+    <div class="w-[200px] flex-none">
+      <span class="uk-form-label"> Mode </span>
+      <ul class="uk-tab-alt mt-2 h-auto">
+        <li class="uk-active">
+          <a href="#demo" uk-toggle>
+            <span class="size-4">
+              <uk-icon icon="letter-text"></uk-icon>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#demo" uk-toggle>
+            <span class="size-4">
+              <uk-icon icon="a-arrow-down"></uk-icon>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#demo" uk-toggle>
+            <span class="size-4">
+              <uk-icon icon="whole-word"></uk-icon>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-4 space-y-2">
+        <span class="uk-form-label block">Model</span>
+        <div class="h-9">
+          <uk-select name="model" searchable uk-cloak>
+            <optgroup label="GPT-3">
+              {
+                [
+                  "text-davinci-003",
+                  "text-curie-001",
+                  "text-babbage-001",
+                  "text-ada-001",
+                ].map((a) => (
+                  <option value={a} selected={a === "text-davinci-003"}>
+                    {a}
+                  </option>
+                ))
+              }
+            </optgroup>
+            <optgroup label="Codex">
+              {
+                ["code-davinci-002", "code-cushman-001"].map((a) => (
+                  <option value={a}>{a}</option>
+                ))
+              }
+            </optgroup>
+          </uk-select>
+        </div>
+      </div>
+
+      <div class="mt-4 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="uk-form-label">Temperature</span>
+          <span class="text-sm text-muted-foreground">0.7</span>
+        </div>
+        <input
+          class="uk-range"
+          type="range"
+          value="0.7"
+          min="0"
+          max="1"
+          step="0.1"
+          disabled
+        />
+      </div>
+
+      <div class="mt-4 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="uk-form-label">Maximum Length</span>
+          <span class="text-sm text-muted-foreground">256</span>
+        </div>
+        <input
+          class="uk-range"
+          type="range"
+          value="256"
+          min="0"
+          max="4000"
+          step="100"
+          disabled
+        />
+      </div>
+
+      <div class="mt-4 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="uk-form-label">Top P</span>
+          <span class="text-sm text-muted-foreground">0.9</span>
+        </div>
+        <input
+          class="uk-range"
+          type="range"
+          value="0.9"
+          min="0"
+          max="1"
+          step="0.1"
+          disabled
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="flex gap-x-2 px-8 py-6 pt-0">
+    <button class="uk-button uk-button-primary" uk-toggle="#demo">
+      Submit
+    </button>
+    <button class="uk-button uk-button-secondary" uk-toggle="#demo">
+      <span class="size-4">
+        <uk-icon icon="history"></uk-icon>
+      </span>
+    </button>
+  </div>
+</Master>

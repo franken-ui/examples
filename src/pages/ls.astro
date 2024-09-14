@@ -1,3 +1,7 @@
+---
+import LsScript from "components/ls-script.astro";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,16 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LS</title>
     <script is:inline>
-      window.addEventListener("message", function (event) {
-        if (event.data === "dark-mode-enabled") {
-          localStorage.setItem("color-theme", "dark");
-        }
-
-        if (event.data === "dark-mode-disabled") {
-          localStorage.setItem("color-theme", "light");
-        }
-      });
+      const htmlElement = document.documentElement;
     </script>
+    <LsScript />
   </head>
   <body> </body>
 </html>
